@@ -2,10 +2,11 @@ const express = require('express');
 const { findById } = require('../models/User');
 const router = express.Router();
 
-const Meeting = require('../models/Meeting')
+const Meeting = require('../models/Meeting');
+const validateJwt = require('../middlewares/validateJwt')
 
 //GET
-router.get('/', async (req,res) => {
+router.get('/', validateJwt, async (req,res) => {
   const meetings = await Meeting.find();
   try {
     return res.status(200).json(meetings)

@@ -4,6 +4,8 @@ const router =  express.Router()
 
 const User = require('../models/User')
 
+const {generateJwt} = require('../middlewares/generateJWT')
+
 router.post('/signup', async(req,res) => {
   const testEmail = await User.findOne({email: req.body.email});
   if(testEmail) {
@@ -20,7 +22,29 @@ router.post('/signup', async(req,res) => {
   }
 })
 
+/*Login
+ -check that emails exist
+ -it that check passes 
+    - check that the req.body.password === User.password
+  -if that passes then we return a JWT (token)
+*/
 
+router.post('/login', async (req, res) => {
+  const {email,password} = req.body;
+
+  const userExist = await User.findOne({email});
+  if(!userExist){
+    return res.status(400).json({message: "User whit that email does not exist"})
+  }
+  const validPassword = bycypt.compareSync(password, userExist.password);
+  if (!validPassword) {
+    return res.status(500).json({message: 'incorrect credentials'});
+  }
+  const token = await generateJwt(userExist._id)
+  return res.json({user: userExist, token})
+})
+
+  
 
 module.exports = router;
 
