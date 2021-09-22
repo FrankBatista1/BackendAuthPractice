@@ -34,14 +34,14 @@ router.post('/login', async (req, res) => {
 
   const userExist = await User.findOne({email});
   if(!userExist){
-    return res.status(400).json({message: "User whit that email does not exist"})
+    return res.status(400).json({message: "User whit that email does not exist"})// "Error whit the server" in production for secure purposes
   }
-  const validPassword = bycypt.compareSync(password, userExist.password);
+  const validPassword = bycypt.compareSync(password, userExist.password);// validating the password returns true or false
   if (!validPassword) {
-    return res.status(500).json({message: 'incorrect credentials'});
+    return res.status(500).json({message: 'incorrect credentials'});// if its incorrect break the code 
   }
-  const token = await generateJwt(userExist._id)
-  return res.json({user: userExist, token})
+  const token = await generateJwt(userExist._id)//gets the value of the key id (uid => userid) and generates a token 
+  return res.json({user: userExist, token})//????
 })
 
   

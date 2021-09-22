@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const validateJwt = (req, res, next) => {
-  const token = req.header('Authorization');
+  const token = req.header('Authorization');// Authorization saves the token previusly created 
   if (!token){
     return res.status(400).json({message: "Token not found"});
   }

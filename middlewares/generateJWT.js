@@ -15,4 +15,3 @@ exports.generateJwt = (uid) => {
   })
 }
 
-module.exports = {generateJwt}
