@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const validateJwt = (req, res, next) => {
   const token = req.header('Authorization');// Authorization saves the token previusly created 
-  if (!token){
+  if (!token){// if is not undefinedr 
     return res.status(400).json({message: "Token not found"});
   }
   try {
@@ -17,4 +17,4 @@ const validateJwt = (req, res, next) => {
 
 module.exports = {
   validateJwt // same as validateJwt : validateJwt
-}
+} 

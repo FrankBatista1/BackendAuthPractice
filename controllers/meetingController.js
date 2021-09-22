@@ -16,21 +16,18 @@ exports.getMeetingById = (async (req, res) => {
     res.status(500).json({message: "Couldn't get field"})
   }
 })
+
 exports.createAMeeting = (async (req, res) => {
-  const meetingCreated = await Meeting.create({
-    concept: req.body.concept,
-    date: req.body.date,
-    startingtime: req.body.startingtime,
-    user: req.body.user
-  })
+  const meetingCreated = await Meeting.create(req.body);
   try {
     return res.status(202).json(meetingCreated);
   }catch (error){
     return res.status(500).json({message: "Couldn't create a meeting"})
   }
-})
+});
+
 exports.updateAMeeting =  (async (req, res) => {
-  const meetingToUpdate = await Meeting.findByIdAndUpdate(req.params.id, req,body, {new: true});
+  const meetingToUpdate = await Meeting.findByIdAndUpdate(req.params.id, req.body, {new: true});
   try {
     return res.status(202).json(meetingToUpdate)
   } catch (error) {

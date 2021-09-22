@@ -10,9 +10,10 @@ mongoose.connect('mongodb://localhost:/newForPractice').then(() => console.log('
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/auth', require('./routes/user'));
-app.use('/api/meeting', require('./routes/meetings'));
+app.use('/api/meetings', require('./routes/meetings'));
 
 
 
