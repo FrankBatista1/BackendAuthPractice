@@ -9,8 +9,9 @@ const {
   deleteMeeting,
 } = require("../controllers/meetingController");
 const Meeting = require("../models/Meeting");
-const { validateJwt } = require("../middlewares/validateJwt");
+const { validateJwt, isAdmin, hasRole } = require("../middlewares/validateJwt");
 const { validateFields } = require("../middlewares/validateFields");
+
 
 //GET
 router.get("/", getMeetingsById);
@@ -26,6 +27,8 @@ router.post(
     check("date", "A date is required for a meeting").not().isEmpty(),
     check("users", "At least one user is required for a meeting").isLength({min: 1}),
     check("startingTime", "You need to declare a strating time").not().isEmpty(),
+    hasRole,
+    isAdmin,
     validateFields
   ],
   createAMeeting

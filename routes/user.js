@@ -27,6 +27,7 @@ router.post('/login', [
   check("email", "Email field is required").isEmail(),
   check("password", "Password must be 8 characters long").isLength({min: 8})
 ],login)
+
   
 
 module.exports = router;

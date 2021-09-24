@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+
+
+//Getting a token for the _id
 exports.generateJwt = (uid) => {
   return new Promise((resolve, reject) => {
     const data = {uid: uid}// could be just uid

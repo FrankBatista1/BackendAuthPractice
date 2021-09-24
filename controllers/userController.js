@@ -1,8 +1,6 @@
 
 const {generateJwt} = require('../middlewares/generateJWT')
 const bycypt = require('bcryptjs')
-
-const {check} = require('express-validator')
 const User = require('../models/User')
 
 exports.singUp = async(req,res) => {
